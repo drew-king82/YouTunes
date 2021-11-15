@@ -1,11 +1,11 @@
 package beans;
 
 public class Artist {
- private Long id;
+ private int id;
  private String firstname;
  private String lastname;
  
- public Artist(Long id, String firstname, String lastname) {
+ public Artist(int id, String firstname, String lastname) {
 	 this.id=id; 
 	 this.firstname=firstname;
 	 this.lastname=lastname;
@@ -18,11 +18,11 @@ public Artist(String firstname, String lastname) {
 	this.firstname = firstname;
 	this.lastname = lastname;
 }
-public void setid(Long id) {
+public void setid(int id) {
 	 this.id=id;
  }
  
- public Long getid () {
+ public int getid () {
 	 return id;
  }
  

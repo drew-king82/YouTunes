@@ -7,9 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="../css/ytunes.css">
+<link rel="stylesheet" type="text/css" href="css/ytunes.css">
 
-<title>Insert title here</title>
+<title>Edit Your Artist Here</title>
 
 </head>
 <body>
@@ -17,18 +17,18 @@
    <%
    try{
 	 String artistid=request.getParameter("artistid");
-	 Artist artist=artistDao.find(Long.parseLong(artistid));
+	 Artist artist=artistDao.find(Integer.parseInt(artistid));
 	 if(artist!=null){
 		 
 	
  
  %>
 
-    <form>
-    <input type="hidden" name="action" value="updateArtist" /> 
+    <form id= "artists">
+    <input type="hidden" name="action" value="artistUpdate" /> 
     <input type="hidden" name="artistid" value="<%=artist.getid()%>"/>
             <fieldset>
-                <legend>New Artists</legend>
+                <legend>Edit Artist</legend>
                 <label for="firstname">First Name</label>
                 <input type="text" id= "firstname" name="firstname" value="<%=artist.getfirstname()%>"/> <br/>
                 <label for="lastname">Last Name</label>

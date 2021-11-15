@@ -46,13 +46,13 @@ public class JdbcAlbumDao implements AlbumDao{
 			try {
 				Statement S1=con.createStatement();
 				String addQuery=
-			"SELECT id, title, price, genre, img url FROM album";
+			"SELECT albumid, title, price, genre, img_url FROM album";
 				try {
 					ResultSet result =S1.executeQuery(addQuery);
 					try {
 					while(result.next()) {
 						Album newAlbum=new Album();
-						newAlbum.setid(result.getLong(1));
+						newAlbum.setid(result.getInt(1));
 						newAlbum.settitle(result.getString(2));
 						newAlbum.setprice(result.getDouble(3));
 						newAlbum.setgenre(result.getString(4));
@@ -75,19 +75,19 @@ public class JdbcAlbumDao implements AlbumDao{
 	}
 
 	@Override
-	public Album find(Long key){
+	public Album find(Integer key){
 		Connection con=db.getConn();
 		Album newAlbum=null;
 		if(con!=null) {
 			try {
 				Statement S1=con.createStatement();
 				String addQuery=
-					"SELECT albumid, firstname, lastname FROM album where albumid=" + key;
+					"SELECT albumid, title, price, genre, img_url, artistid FROM album where albumid=" + key;
 				try {
 					ResultSet result=S1.executeQuery(addQuery);
 					try {
 						if (result.next()) {
-							newAlbum=new Album(result.getString(2), result.getDouble(3), result.getString(4), result.getString(5), result.getLong(6));
+							newAlbum=new Album(result.getInt(1),result.getString(2), result.getDouble(3), result.getString(4), result.getString(5), result.getInt(6));
 									
 						}
 					} finally { 
@@ -111,7 +111,7 @@ public class JdbcAlbumDao implements AlbumDao{
 			try {
 				Statement S1=con.createStatement();
 				String updateQuery= 
-						"UPDATE album SET title = '"+ entity.gettitle() + "',price='"+ entity.getprice()+"', genre='"+ entity.getgenre()+"', url='"+ entity.geturl()+"', WHERE albumId = "+ entity.getid();
+						"UPDATE album SET title = '"+ entity.gettitle() + "',price='"+ entity.getprice()+"', genre='"+ entity.getgenre()+"', img_url='"+ entity.geturl()+"' WHERE albumid = "+ entity.getid();
 				try {
 					S1.executeUpdate(updateQuery);
 				} finally {
@@ -126,13 +126,13 @@ public class JdbcAlbumDao implements AlbumDao{
 			}
 
 	@Override
-	public void remove(Long key){
+	public void remove(Integer key){
 		Connection con=db.getConn();
 		if(con!=null) {
 			try {
 				Statement S1=con.createStatement();
 				String deleteQuery= 
-					"DELETE FROM Album WHERE id='"+key;
+					"DELETE FROM Album WHERE albumid="+key;
 				try {
 					S1.executeUpdate(deleteQuery);
 				} finally {

@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.Album;
 import beans.Artist;
+import model.JdbcAlbumDao;
 import model.JdbcArtistDao;
 
 /**
@@ -49,17 +51,50 @@ public class Youtunes extends HttpServlet {
 		          url = base + "artistList.jsp";
 		          break;
 		        case "artistAdd":
-		          artistAdd(request, response);
-		          url = base + "NewArtists.jsp";
+		        url = base + "NewArtists.jsp";
+		          break;
+		        case "artistUpdate":
+		          artistUpdate(request,response);
+		          url = base + "artistList.jsp";
 		          break;
 		        case "artistDetail":
-		          artistUpdate(request,response);
-		          url = base + "ArtistDetails.jsp";
-		          break;
+			      url = base + "ArtistDetails.jsp";
+			      break;
+		        case "artistNew":
+		          artistAdd(request, response);
+			      url = base + "artistList.jsp";
+			      break;
 		        case "artistDelete":
 		          artistRemove(request, response);
 		          url = base + "artistList.jsp";
 		          break;
+		        case "albumlist":
+			      url = base + "Index.jsp";
+			      break;
+		        case "albumadd":
+			      url = base + "NewAlbums.jsp";
+			      break;
+		    	case "albumNew":
+		    	  albumAdd(request,response);
+		    	  url = base + "index.jsp";
+		    	  break;
+		        case "updateAlbum":
+		          albumUpdate(request, response);
+			      url = base + "Index.jsp";
+			      break;
+		        case "albumDetail":
+				  url = base + "AlbumDetails.jsp";
+				  break;
+		        case "albumDelete":
+		          albumDelete(request, response);
+			      url = base + "Index.jsp";
+			      break;
+		        case "About":
+			      url = base + "About.jsp";
+			      break;
+		        case "ContactUs":
+			      url = base + "ContactUs.jsp";
+			      break;
 		        }
 		      }
 		    RequestDispatcher requestDispatcher =
@@ -75,7 +110,7 @@ public class Youtunes extends HttpServlet {
 		
 		//create new artist object
 		Artist updateArtist=new Artist();
-		updateArtist.setid(Long.parseLong(id));
+		updateArtist.setid(Integer.parseInt(id));
 		updateArtist.setfirstname(firstname);
 		updateArtist.setlastname(lastname);
 		
@@ -117,10 +152,74 @@ public class Youtunes extends HttpServlet {
 		//create JdbcArtistDao object
 		JdbcArtistDao removeJAD=new JdbcArtistDao();
 		
-		//call JdbcArtistDao method remove, passing artistid as parameter
-		removeJAD.remove(Long.parseLong(id));
+		//call JdbcArtistDao method remove, passing id as parameter
+		removeJAD.remove(Integer.parseInt(id));
 		
 		//Print result to user
-		System.out.println("The new artist has been added.");
+		System.out.println("The new artist has been deleted.");
 		}	
+		
+		private void albumUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException{
+			//define fields
+			String id= request.getParameter("albumid"); 
+			String title= request.getParameter("title");
+			String price= request.getParameter("price");
+			String genre= request.getParameter("genre");
+			String url= request.getParameter("img_url");
+			String artistid= request.getParameter("artistid");
+			
+			//create new album object
+			Album updateAlbum=new Album();
+			updateAlbum.setid(Integer.parseInt(id));
+			updateAlbum.settitle(title);
+			updateAlbum.setprice(Double.parseDouble(price));
+			updateAlbum.setgenre(genre);
+			updateAlbum.seturl(url);
+			updateAlbum.setArtistid(Integer.parseInt(artistid));
+		
+			//create new JdbcAlbumDao object
+			JdbcAlbumDao updateJAD=new JdbcAlbumDao();
+			
+			//Call JdbcAlbumDao update method, passing artist object as parameter
+			updateJAD.update(updateAlbum);
+			
+			//Print result to user
+			System.out.println("The album has been updated.");
+			}
+
+		private void albumAdd(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException{
+			//define fields
+			
+			String title= request.getParameter("title");
+			Double price= Double.parseDouble(request.getParameter("price"));
+			String genre= request.getParameter("genre");
+			String url= request.getParameter("url");
+			Integer artistid= Integer.parseInt(request.getParameter("artistid"));
+				
+			//create new JdbcAlbumDao object
+			JdbcAlbumDao addJAD=new JdbcAlbumDao();
+			
+			//Create a new Artist object, using first and last name defined in fields
+			Album addAlbum= new Album(title, price, genre, url, artistid);
+					
+			//call JdbcAlbumDao add method, passing Artist object as parameter
+			addJAD.add(addAlbum); 
+			//Print result to user
+			System.out.println("The new album has been added.");
+			}
+
+			private void albumDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException{
+			//define field to identify album
+			String id= request.getParameter("albumid"); 
+			
+					
+			//create JdbcAlbumDao object
+			JdbcAlbumDao removeJAD=new JdbcAlbumDao();
+			
+			//call JdbcAlbumDao method remove, passing albumid as parameter
+			removeJAD.remove(Integer.parseInt(id));
+			
+			//Print result to user
+			System.out.println("The new album has been deleted.");
+			}
 	}

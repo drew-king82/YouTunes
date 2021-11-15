@@ -52,7 +52,7 @@ public class JdbcArtistDao implements ArtistDao{
 					try {
 					while(result.next()) {
 						Artist newArtist=new Artist();
-						newArtist.setid(result.getLong(1));
+						newArtist.setid(result.getInt(1));
 						newArtist.setfirstname(result.getString(2));
 						newArtist.setlastname(result.getString(3));
 						artists.add(newArtist);
@@ -73,7 +73,7 @@ public class JdbcArtistDao implements ArtistDao{
 	}
 
 	@Override
-	public Artist find(Long key){
+	public Artist find(Integer key){
 		Connection con=db.getConn();
 		Artist newArtist=null;
 		if(con!=null) {
@@ -85,7 +85,7 @@ public class JdbcArtistDao implements ArtistDao{
 					ResultSet result=S1.executeQuery(addQuery);
 					try {
 						if (result.next()) {
-							newArtist=new Artist(result.getLong(1),result.getString(2), result.getString(3));
+							newArtist=new Artist(result.getInt(1),result.getString(2), result.getString(3));
 									
 						}
 					} finally { 
@@ -109,7 +109,7 @@ public class JdbcArtistDao implements ArtistDao{
 			try {
 				Statement S1=con.createStatement();
 				String updateQuery= 
-						"UPDATE artist SET firstname = '"+ entity.getfirstname() + "',lastname='"+ entity.getlastname()+"', WHERE artistId = "+ entity.getid();
+						"UPDATE artist SET firstname = '"+ entity.getfirstname() + "',lastname='"+ entity.getlastname()+"' WHERE artistid = "+ entity.getid();
 				try {
 					S1.executeUpdate(updateQuery);
 				} finally {
@@ -124,17 +124,23 @@ public class JdbcArtistDao implements ArtistDao{
 			}
 
 	@Override
-	public void remove(Long key){
+	public void remove(Integer key){
 		Connection con=db.getConn();
 		if(con!=null) {
 			try {
 				Statement S1=con.createStatement();
+				Statement S2=con.createStatement();
+				
 				String deleteQuery= 
-					"DELETE FROM Artist WHERE id='"+key;
+					"DELETE FROM Artist WHERE artistid="+key;
+				String deleteQuery2=
+				    "DELETE FROM Album WHERE artistid="+key;
 				try {
+				    S2.executeUpdate(deleteQuery2);
 					S1.executeUpdate(deleteQuery);
 				} finally {
 					S1.close();
+					S2.close();
 				}
 			} catch(Exception e) {
 				System.out.println(e);

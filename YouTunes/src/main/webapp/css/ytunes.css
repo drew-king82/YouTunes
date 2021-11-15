@@ -1,37 +1,108 @@
 @charset "UTF-8";
 /* Style the side navigation */
-.topnav {
-  height: 100%;
-  width: 200px;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #fa9001;
-  overflow-x: hidden;
-}
+*{
+   box-sizing: border-box;
+ }
+ body{
+  font-family: Arial, Calibri, sans-serif;
+ }
+ 
+ header{
+ background-color: white;
+ padding: 50px;
+ text-align: center;
+ font-size: 35px;
+ color: black;
 
+ }
+  
+ h2{
+   left: 200px;
+   position: relative;
+   font-family: Calibri, sans-serif;	
+   font-size: 35px;
+   color: black;
+   text-align: left;
+ }
+ 
+ .topnav{
+ float: left;
+ width:200px;
+ height: 100%;
+ background: #FFAC1C;
+ padding: 20px;
+ position: fixed;
+ color: white;
+ }
+ 
+ .topnav ul{
+ list-style-type:none;
+ padding: 10%;
+ height: 100%;
+ font-family: Calibri, sans-serif;
+ font-style: bold;
+ font-size: 18px;
+ color: #FFAC1C;
+ text-align: center;
+ color: white;
+ }
+ 
+ section{
+ width: 200px;
+ height: 100%;
+ background-color:#FFAC1C;
+ }
 
-/* Side navigation links */
-.topnav a {
-  color: #f8f8f8;
-  padding: 16px;
-  text-decoration: none;
+li a{
   display: block;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
 }
 
-/* Change color on hover */
-.sidenav a:hover {
-  background-color: #ff9201;
-  color: #fa9001;
+#albums{
+	left: 200px;
+	position: relative;
 }
 
-h1{
-	color: #fa9001
+#artists{
+	left: 200px;
+	position: relative;
 }
 
-footer {
-	border: 2px solid #f8f8f8;
-	border-radius: 5px;
-	background-color:Tomato;
+li a.active{
+  background-color: #FFAC1C;
+  color: white;
 }
+
+li a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
+
+article{
+   left: 400px;
+   font: Calibri;
+   position: fixed;		
+   float: left;
+   padding: 20px;
+   width: 70%;
+   background-color: #FFFFFF;
+   height: 300px;
+   text-align: left;
+}
+
+/*style footer */
+ footer{
+ position: fixed;
+ bottom: 0;
+ width:100%;
+ height: 30px;	
+ background-color:#FFAC1C;
+ padding: 10px;
+
+ }
+ 
+
+ 
+

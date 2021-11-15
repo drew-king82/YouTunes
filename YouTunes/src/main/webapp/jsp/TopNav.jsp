@@ -8,11 +8,14 @@
 </head>
 <body>
 
-</body>
- <div class="topnav">
-  <a class="active" href="Index.jsp">Home</a>
-  <a href="artistList.jsp">Artists</a>
-  <a href="aboutus.jsp">About Us</a>
-  <a href="contactus.jsp">Contact Us</a>
-</div> 
+ 
+ <div class ="topnav">
+   <ul>
+  <li><a class="active" href="Youtunes">Home</a></li>
+  <li><a href="Youtunes?action=artistList">Artists</a></li>
+  <li><a href="Youtunes?action=About">About Us</a></li>
+  <li><a href="Youtunes?action=ContactUs">Contact Us</a></li>
+	</ul>
+ </div>
+
 </html>

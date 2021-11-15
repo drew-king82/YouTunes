@@ -14,7 +14,7 @@
 <jsp:include page="TopNav.jsp"/>
 
         <form>
-    <input type="hidden" name="action" value="artistAdd" /> 
+    <input type="hidden" name="action" value="artistNew" /> 
 
             <fieldset>
                 <legend>New Albums</legend>

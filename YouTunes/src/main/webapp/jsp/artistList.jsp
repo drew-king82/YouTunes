@@ -19,6 +19,7 @@
 <body>
 
 <jsp:include page="TopNav.jsp"/>
+<a href="Youtunes?action=artistAdd">New Artist</a>
 
  <div align="center">
  
@@ -44,8 +45,8 @@
                     <td><%=artist.getfirstname()%></td>
                     <td><%=artist.getlastname()%></td>
 					<td>
-					    <a href="YouTunes/Youtunes?action=artistDetail&id=<%=artist.getid()%>">Update</a>
-					    <a href="Youtunes?action=artistDelete&id=<%=artist.getid()%>">Update</a>
+					    <a href="Youtunes?action=artistDetail&artistid=<%=artist.getid()%>">Update</a>
+					    <a href="Youtunes?action=artistDelete&artistid=<%=artist.getid()%>">Delete</a>
 					    
                 </tr>
 		<%}%>

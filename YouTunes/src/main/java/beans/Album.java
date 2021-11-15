@@ -1,17 +1,17 @@
 package beans;
 
 public class Album {
- private Long id;
+ private int id;
  private String title;
  private Double price;
  private String genre;
  private String url;
- private Long Artistid;
+ private int Artistid;
  
  public Album() {
 	// TODO Auto-generated constructor stub
 }
-public Album(String title, Double price, String genre, String url, Long Artistid) {
+public Album(String title, Double price, String genre, String url, int Artistid) {
 	// TODO Auto-generated constructor stub
 	this.title = title;
 	this.price = price;
@@ -19,11 +19,21 @@ public Album(String title, Double price, String genre, String url, Long Artistid
 	this.url = url;
 	this.Artistid = Artistid;
 }
-public void setid(Long id) {
+
+public Album(Integer id, String title, Double price, String genre, String url, int Artistid) {
+	// TODO Auto-generated constructor stub
+	this.id = id;
+	this.title = title;
+	this.price = price;
+	this.genre = genre;
+	this.url = url;
+	this.Artistid = Artistid;
+}
+public void setid(Integer id) {
 	 this.id=id;
  }
  
- public Long getid () {
+ public Integer getid () {
 	 return id;
  }
  
@@ -58,11 +68,11 @@ public String geturl() {
 	return url;
 }
 
-public void setArtistid(Long Artistid) {
+public void setArtistid(int Artistid) {
 	this.Artistid=Artistid;
 }
 
-public Long getArtistid() {
+public int getArtistid() {
 	return Artistid;
 }
 
